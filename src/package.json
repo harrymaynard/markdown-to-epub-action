@@ -1,0 +1,23 @@
+{
+  "name": "markdowntoepub",
+  "version": "1.0.0",
+  "description": "Converts a collection of markdown files to an EPub file.",
+  "main": "action.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harrymaynard/markdowntoepub-action.git"
+  },
+  "author": "Harry Maynard",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/harrymaynard/markdowntoepub-action/issues"
+  },
+  "homepage": "https://github.com/harrymaynard/markdowntoepub-action#readme",
+  "dependencies": {
+    "marked": "^14.0.0"
+  }
+}

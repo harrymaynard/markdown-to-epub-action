@@ -1,0 +1,19 @@
+# action.yml
+name: 'MarkdownToEPub'
+description: 'Converts a collection of markdown files to an EPub file.'
+inputs:
+  include:  # id of input
+    description: 'Markdown files to include'
+    required: true
+    default: ''
+  exclude: # id of input
+    description: 'Markdown files to exclude'
+    required: false
+    default: ''
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.include }}
+    - ${{ inputs.exclude }}
