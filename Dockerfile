@@ -9,13 +9,13 @@ LABEL "homepage"="https://github.com/harrymaynard/markdowntoepub-action"
 LABEL "maintainer"="harrymaynard"
 
 # Copy the action's code into the container.
-COPY src /src
+COPY . /
 
 # Install dependencies.
-RUN cd /src && npm install
+RUN npm install
 
 # Make the entrypoint script executable.
-RUN chmod +x /src/entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 # Run the action.
-ENTRYPOINT ["/src/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
