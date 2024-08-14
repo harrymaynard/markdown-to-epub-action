@@ -1,1 +1,3 @@
-node ./action.js
+#!/bin/sh
+
+node ./src/action.js

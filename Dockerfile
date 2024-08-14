@@ -9,6 +9,6 @@ LABEL "repository"="https://github.com/harrymaynard/markdowntoepub-action"
 LABEL "homepage"="https://github.com/harrymaynard/markdowntoepub-action"
 LABEL "maintainer"="harrymaynard"
 
-COPY ./src /action
-RUN chmod +x /action/entrypoint.sh
-ENTRYPOINT ["/action/entrypoint.sh"]
+COPY src /src
+RUN chmod +x /src/entrypoint.sh
+ENTRYPOINT ["/src/entrypoint.sh"]
