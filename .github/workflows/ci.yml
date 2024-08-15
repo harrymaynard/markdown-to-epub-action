@@ -1,0 +1,22 @@
+name: Publish
+
+on: [push, workflow_dispatch]
+
+jobs:
+  job_1:
+    name: Create ePub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Create ePub
+        uses: harrymaynard/markdowntoepub-action@main
+        with:
+          includes: |-
+            README.md
+            test-data/*.md
+      - name: Upload ePub
+        uses: actions/upload-artifact@v4
+        with:
+          name: book
+          path: example.html
