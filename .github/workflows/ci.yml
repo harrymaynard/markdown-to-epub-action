@@ -12,7 +12,7 @@ jobs:
       - name: Create ePub
         uses: harrymaynard/markdowntoepub-action@main
         with:
-          includes: |-
+          include: |-
             README.md
             test-data/*.md
       - name: Upload ePub
