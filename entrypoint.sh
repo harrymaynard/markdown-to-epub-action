@@ -1,6 +1,6 @@
 #!/bin/sh
 
-node /action.js " '%s'" "$@"
+node /action.js
 
 # `$#` expands to the number of arguments and `$@` expands to the supplied `args`
 printf '%d args:' "$#"
