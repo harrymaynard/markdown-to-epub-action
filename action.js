@@ -49,9 +49,9 @@ const option = {
   ]
 }
 
-await new EPub(option, '/book.epub').promise
+await new EPub(option, 'book.epub').promise
 //console.log('allMarkdown:', allMarkdown)
 const html = marked.parse(allMarkdown)
 console.log('html:', html, '\n')
-fs.writeFileSync('example.html', html)
+
 
