@@ -130,3 +130,6 @@ dist
 .pnp.*
 
 book.epub
+
+# macOS files
+.DS_Store
