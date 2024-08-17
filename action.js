@@ -7,14 +7,14 @@ import { marked } from 'marked'
 import { glob } from 'glob'
 import { EPub } from '@lesjoursfr/html-to-epub'
 
-const markdownFiles = process.env.INPUT_MARKDOWNFILES
-const title = process.env.INPUT_TITLE
-const author = process.env.INPUT_AUTHOR
-const publisher = process.env.INPUT_PUBLISHER
-const cover = process.env.INPUT_COVER
-const version = parseInt(process.env.INPUT_VERSION)
-const lang = process.env.INPUT_LANG
-const tocTitle = process.env.INPUT_TOCTITLE
+const markdownFiles = process.env.INPUT_MARKDOWNFILES // Required parameter.
+const title = process.env.INPUT_TITLE // Required parameter.
+const author = process.env.INPUT_AUTHOR // Required parameter.
+const publisher = process.env.INPUT_PUBLISHER || undefined
+const cover = process.env.INPUT_COVER || undefined
+const version = parseInt(process.env.INPUT_VERSION) || 3
+const lang = process.env.INPUT_LANG || 'en'
+const tocTitle = process.env.INPUT_TOCTITLE || undefined
 const hideToC = process.env.INPUT_HIDETOC === 'true'
 
 if (!markdownFiles) {
@@ -25,7 +25,7 @@ if (!markdownFiles) {
 const includes = markdownFiles?.split('\\n') || []
 let allMarkdown = ''
 
-console.log('include:', include)
+console.log('markdownFiles:', markdownFiles)
 
 for (const includeIndex in includes) {
   const regex = includes[includeIndex]
