@@ -23,15 +23,15 @@ inputs:
     required: false
     default: ''
   version:
-    description: 'EPub version. Default is \'3\'. Choose \'2\' for legacy support.'
+    description: 'EPub version. Default is "3". Choose "2" for legacy support.'
     required: false
     default: '3'
   lang:
-    description: 'Language code of the book. Default is \'en\'.'
+    description: 'Language code of the book. Default is "en".'
     required: false
     default: 'en'
   tocTitle:
-    description: 'Title of the table of contents. Default is \'Table of Contents\'.'
+    description: 'Title of the table of contents. Default is "Table of Contents".'
     required: false
     default: 'Table of Contents'
   hideToC:
