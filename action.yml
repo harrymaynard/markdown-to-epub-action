@@ -2,18 +2,53 @@
 name: 'MarkdownToEPub'
 description: 'Converts a collection of markdown files to an EPub file.'
 inputs:
-  include:  # id of input
+  markdownFiles:
     description: 'Markdown files to include'
     required: true
     default: ''
-  exclude: # id of input
-    description: 'Markdown files to exclude'
+  title:
+    description: 'Title of the book'
+    required: true
+    default: ''
+  author:
+    description: 'Name of the author for the book'
+    required: true
+    default: ''
+  publisher:
+    description: 'Publisher name'
     required: false
     default: ''
+  cover:
+    description: 'Cover image (URL or absolute path)'
+    required: false
+    default: ''
+  version:
+    description: 'EPub version. Default is \'3\'. Choose \'2\' for legacy support.'
+    required: false
+    default: 3
+  lang:
+    description: 'Language code of the book. Default is \'en\'.'
+    required: false
+    default: 'en'
+  tocTitle:
+    description: 'Title of the table of contents. Default is \'Table of Contents\'.'
+    required: false
+    default: 'Table of Contents'
+  hideToC:
+    description: 'Hide the table of contents. Default is false.'
+    required: false
+    default: false
 
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.include }}
-    - ${{ inputs.exclude }}
+    - ${{ inputs.markdownFiles }}
+    - ${{ inputs.title }}
+    - ${{ inputs.author }}
+    - ${{ inputs.publisher }}
+    - ${{ inputs.cover }}
+    - ${{ inputs.version }}
+    - ${{ inputs.lang }}
+    - ${{ inputs.tocTitle }}
+    - ${{ inputs.hideToC }}

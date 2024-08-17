@@ -12,9 +12,13 @@ jobs:
       - name: Create ePub
         uses: harrymaynard/markdowntoepub-action@main
         with:
-          include: |-
+          markdownFiles: |-
             README.md
             test-data/*.md
+          title: My Book
+          author: Harry Maynard
+          publisher: Harry Maynard Publishing Company
+          cover: https://example.com/cover.jpg
       - name: Upload ePub
         uses: actions/upload-artifact@v4
         with:

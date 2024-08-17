@@ -5,15 +5,24 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import { marked } from 'marked'
 import { glob } from 'glob'
-import EPub from 'epub-gen'
+import { EPub } from '@lesjoursfr/html-to-epub'
 
-const include = process.env.INPUT_INCLUDE
-if (!include) {
-  console.error('Missing required input: \'include\'')
+const markdownFiles = process.env.INPUT_MARKDOWNFILES
+const title = process.env.INPUT_TITLE
+const author = process.env.INPUT_AUTHOR
+const publisher = process.env.INPUT_PUBLISHER
+const cover = process.env.INPUT_COVER
+const version = process.env.INPUT_VERSION
+const lang = process.env.INPUT_LANG
+const tocTitle = process.env.INPUT_TOCTITLE
+const hideToC = process.env.INPUT_HIDETOC
+
+if (!markdownFiles) {
+  console.error('Missing required input: \'markdownFiles\'')
   process.exit(1)
 }
 
-const includes = include?.split('\\n') || []
+const includes = markdownFiles?.split('\\n') || []
 let allMarkdown = ''
 
 console.log('include:', include)
@@ -31,10 +40,15 @@ for (const includeIndex in includes) {
 
 
 const option = {
-  title: "Alice's Adventures in Wonderland", // *Required, title of the book.
-  author: "Lewis Carroll", // *Required, name of the author.
-  publisher: "Macmillan & Co.", // optional
-  cover: "http://demo.com/url-to-cover-image.jpg", // Url or File path, both ok.
+  title,
+  author,
+  publisher,
+  cover,
+  version,
+  lang,
+  tocTitle,
+  hideToC,
+  verbose: true,
   content: [
     {
         title: "About the author", // Optional
@@ -49,8 +63,13 @@ const option = {
   ]
 }
 
-await new EPub(option, 'book.epub').promise
-//console.log('allMarkdown:', allMarkdown)
+try {
+  const epub = new EPub(option, 'book.epub');
+  await epub.render()
+  console.log('Ebook Generated Successfully!')
+} catch (error) {
+  console.error('Failed to generate Ebook because of:', error);
+}
 const html = marked.parse(allMarkdown)
 console.log('html:', html, '\n')
 
