@@ -12,10 +12,10 @@ const title = process.env.INPUT_TITLE
 const author = process.env.INPUT_AUTHOR
 const publisher = process.env.INPUT_PUBLISHER
 const cover = process.env.INPUT_COVER
-const version = process.env.INPUT_VERSION
+const version = parseInt(process.env.INPUT_VERSION)
 const lang = process.env.INPUT_LANG
 const tocTitle = process.env.INPUT_TOCTITLE
-const hideToC = process.env.INPUT_HIDETOC
+const hideToC = process.env.INPUT_HIDETOC === 'true'
 
 if (!markdownFiles) {
   console.error('Missing required input: \'markdownFiles\'')
