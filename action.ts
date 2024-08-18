@@ -34,7 +34,7 @@ if (!author) {
   process.exit(1)
 }
 
-const includes: Array<string> = markdownFiles?.split('\\n') || []
+const includes: Array<string> = markdownFiles?.split('\n') || []
 const chapters: Array<IChapter> = []
 
 for (const includeIndex in includes) {
