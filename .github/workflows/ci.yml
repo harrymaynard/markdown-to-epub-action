@@ -13,7 +13,8 @@ jobs:
         uses: harrymaynard/markdowntoepub-action@main
         with:
           markdownFiles: |-
-            test-data/*.md
+            test-data/publication.md
+            test-data/chapter-*.md
           title: My Book
           author: Harry Maynard
           publisher: Harry Maynard Publishing Company
