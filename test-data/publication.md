@@ -1,4 +1,4 @@
-[metadata:title]:- " "
+[metadata:title]:- "Publication"
 [metadata:beforeToc]:- "true"
 [metadata:excludeFromToc]:- "true"
 

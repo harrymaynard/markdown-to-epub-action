@@ -3,7 +3,7 @@ name: Publish
 on: [push, workflow_dispatch]
 
 jobs:
-  job_1:
+  generate-epub:
     name: Create ePub
     runs-on: ubuntu-latest
     steps:
@@ -16,8 +16,8 @@ jobs:
             test-data/publication.md
             test-data/chapter-*.md
           title: My Book
-          author: Harry Maynard
-          publisher: Harry Maynard Publishing Company
+          author: John Doe
+          publisher: ACME Publishing Inc.
           cover: https://example.com/cover.jpg
       - name: Upload ePub
         uses: actions/upload-artifact@v4
