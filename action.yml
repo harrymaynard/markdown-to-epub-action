@@ -38,6 +38,10 @@ inputs:
     description: 'Hide the table of contents. Default is false.'
     required: false
     default: 'false'
+  output:
+    description: 'Name of the output EPub file'
+    required: false
+    default: 'book.epub'
 
 runs:
   using: 'docker'

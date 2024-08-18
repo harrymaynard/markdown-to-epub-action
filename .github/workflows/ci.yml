@@ -13,7 +13,6 @@ jobs:
         uses: harrymaynard/markdowntoepub-action@main
         with:
           markdownFiles: |-
-            README.md
             test-data/*.md
           title: My Book
           author: Harry Maynard
