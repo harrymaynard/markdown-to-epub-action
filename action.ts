@@ -36,10 +36,11 @@ if (!author) {
 
 const includes: Array<string> = markdownFiles?.split('\n') || []
 const chapters: Array<IChapter> = []
+const gitHubWorkspaceDir: string = process.env.GITHUB_WORKSPACE || '/github/workspace'
 
 for (const includeIndex in includes) {
   const regex: string = includes[includeIndex]
-  const markdownFileNames: Array<string> = await glob(`/github/workspace/**/${regex.trim()}`, { ignore: 'node_modules/**' })
+  const markdownFileNames: Array<string> = await glob(`${gitHubWorkspaceDir}/**/${regex.trim()}`, { ignore: 'node_modules/**' })
 
   // Sort the markdown files by name.
   if (markdownFileNames.length > 0) {
@@ -101,7 +102,7 @@ const option = {
 }
 
 try {
-  const epub = new EPub(option, output);
+  const epub = new EPub(option, `${gitHubWorkspaceDir}/${output}`);
   await epub.render()
   console.log('Ebook Generated Successfully! Output:', output)
 } catch (error) {
