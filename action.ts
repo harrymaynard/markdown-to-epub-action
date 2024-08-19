@@ -39,7 +39,7 @@ const chapters: Array<IChapter> = []
 
 for (const includeIndex in includes) {
   const regex: string = includes[includeIndex]
-  const markdownFileNames: Array<string> = await glob(regex.trim(), { ignore: 'node_modules/**' })
+  const markdownFileNames: Array<string> = await glob(`/github/workspace/**/${regex.trim()}`, { ignore: 'node_modules/**' })
 
   // Sort the markdown files by name.
   if (markdownFileNames.length > 0) {
