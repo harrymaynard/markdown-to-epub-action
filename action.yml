@@ -1,8 +1,12 @@
 # action.yml
 name: 'Markdown to ePub'
 description: 'Converts a collection of markdown files to an EPub file.'
-icon: book
-color: green
+author: 'harrymaynard'
+
+branding:
+  icon: book
+  color: green
+
 inputs:
   markdownFiles:
     description: 'Markdown files to include'
