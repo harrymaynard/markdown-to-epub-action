@@ -8,16 +8,20 @@ import { glob } from 'glob'
 import { EPub } from '@lesjoursfr/html-to-epub'
 import { type IChapter } from './interfaces/IChapter.ts'
 
+// GitHub workspace directory.
+const gitHubWorkspaceDir: string = process.env.GITHUB_WORKSPACE || '/github/workspace'
+
+// Inputs.
 const markdownFiles: string = process.env.INPUT_MARKDOWNFILES // Required parameter.
 const title: string = process.env.INPUT_TITLE // Required parameter.
 const author: string = process.env.INPUT_AUTHOR // Required parameter.
 const publisher: string = process.env.INPUT_PUBLISHER || undefined
-const cover: string = process.env.INPUT_COVER || undefined
 const version: number = parseInt(process.env.INPUT_VERSION) || 3
 const lang: string = process.env.INPUT_LANG || 'en'
 const tocTitle: string = process.env.INPUT_TOCTITLE || undefined
 const hideToC: boolean = process.env.INPUT_HIDETOC === 'true'
 const output: string = process.env.INPUT_OUTPUT || 'book.epub'
+let cover: string = process.env.INPUT_COVER
 
 if (!markdownFiles) {
   console.error('Missing required input: \'markdownFiles\'')
@@ -34,9 +38,13 @@ if (!author) {
   process.exit(1)
 }
 
+// Check if the cover is a URL or a file path.
+if (typeof cover === 'string' && !cover.trim().startsWith('http')) {
+  cover = `${gitHubWorkspaceDir}/${process.env.INPUT_COVER}`
+}
+
 const includes: Array<string> = markdownFiles?.split('\n') || []
 const chapters: Array<IChapter> = []
-const gitHubWorkspaceDir: string = process.env.GITHUB_WORKSPACE || '/github/workspace'
 
 for (const includeIndex in includes) {
   const regex: string = includes[includeIndex]
