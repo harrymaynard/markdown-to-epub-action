@@ -18,10 +18,9 @@ jobs:
           title: My Book
           author: John Doe
           publisher: ACME Publishing Inc.
-          cover: https://example.com/cover.jpg
+          cover: test-data/images/cover.jpg
           version: 3
           lang: en
           tocTitle: My Table of Contents
           hideToC: false
           output: my-book.epub
-          
