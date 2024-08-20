@@ -5,7 +5,7 @@ GitHub action for converting markdown files to a combined ePub file.
 Sample of the action with the required inputs:
 ```yml
 - name: Create ePub
-  uses: harrymaynard/markdowntoepub-action@v1
+  uses: harrymaynard/markdown-to-epub-action@v1
   with:
     markdownFiles: |-
       test-data/publication.md
