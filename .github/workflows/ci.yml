@@ -19,8 +19,9 @@ jobs:
           author: John Doe
           publisher: ACME Publishing Inc.
           cover: https://example.com/cover.jpg
-      - name: Upload ePub
-        uses: actions/upload-artifact@v4
-        with:
-          name: book
-          path: book.epub
+          version: 3
+          lang: en
+          tocTitle: My Table of Contents
+          hideToC: false
+          output: my-book.epub
+          
