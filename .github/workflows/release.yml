@@ -22,7 +22,7 @@ jobs:
           title: My Book
           author: John Doe
           publisher: ACME Publishing Inc.
-          cover: https://example.com/cover.jpg
+          cover: test-data/images/cover.jpg
       - name: Upload Release Asset
         id: upload-release-asset 
         uses: actions/upload-release-asset@v1
