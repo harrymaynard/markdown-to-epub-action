@@ -5,6 +5,7 @@
   "main": "action.ts",
   "type": "module",
   "scripts": {
+    "build": "ncc build --license licenses.txt src/main.ts",
     "start": "node --import=tsx ./src/main.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -26,6 +27,7 @@
     "marked": "^14.0.0"
   },
   "devDependencies": {
+    "@vercel/ncc": "^0.38.3",
     "tsx": "^4.17.0",
     "typescript": "~5.5.4"
   }

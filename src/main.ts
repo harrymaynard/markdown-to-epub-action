@@ -18,5 +18,5 @@ const main = async (): Promise<void> => {
 
 main().catch((e: Error) => {
   core.setFailed(e)
-  console.error(e)
+  core.error(e)
 })
