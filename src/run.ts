@@ -57,7 +57,7 @@ export const run = async (inputs: IInputs): Promise<void> => {
 
   // Check if the cover is a URL or a file path.
   if (typeof cover === 'string' && !cover.trim().startsWith('http')) {
-    cover = `${gitHubWorkspaceDir}/${process.env.INPUT_COVER}`
+    cover = `${gitHubWorkspaceDir}/${cover}`
   }
 
   const includes: Array<string> = markdownFiles?.split('\n') || []

@@ -107554,7 +107554,7 @@ const run = async (inputs) => {
     }
     // Check if the cover is a URL or a file path.
     if (typeof cover === 'string' && !cover.trim().startsWith('http')) {
-        cover = `${gitHubWorkspaceDir}/${process.env.INPUT_COVER}`;
+        cover = `${gitHubWorkspaceDir}/${cover}`;
     }
     const includes = markdownFiles?.split('\n') || [];
     const chapters = [];
