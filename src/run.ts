@@ -1,14 +1,14 @@
 import * as core from '@actions/core'
-import * as github from '@actions/github';
+import * as github from '@actions/github'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { marked } from 'marked'
 import { glob } from 'glob'
 import { EPub } from '@lesjoursfr/html-to-epub'
-import { type IChapter } from './interfaces/IChapter.ts'
+import { type IChapter } from './interfaces/IChapter'
 
-interface IInputs = {
+interface IInputs {
   markdownFiles: string
   title: string
   author: string
@@ -26,7 +26,7 @@ export const run = async (inputs: IInputs): Promise<void> => {
   core.info(`title is: ${inputs.title}`)
 
   // GitHub workspace directory.
-  const gitHubWorkspaceDir: string = github.workspace // || '/github/workspace'
+  const gitHubWorkspaceDir: string = process.env.GITHUB_WORKSPACE // || '/github/workspace'
 
   // Inputs.
   const markdownFiles: string = inputs.markdownFiles // Required parameter.
@@ -99,7 +99,7 @@ export const run = async (inputs: IInputs): Promise<void> => {
         : undefined
 
       // Generate the HTML content from markdown.
-      const html: string = marked.parse(markdown)
+      const html: string = await marked.parse(markdown)
       
       // Concatenate the chapter to the chapters list.
       chapters.push({
@@ -115,6 +115,7 @@ export const run = async (inputs: IInputs): Promise<void> => {
 
   const option = {
     title,
+    description: '',
     author,
     publisher,
     cover,
