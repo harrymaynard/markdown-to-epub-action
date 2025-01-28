@@ -107556,6 +107556,7 @@ const run = async (inputs) => {
     if (typeof cover === 'string' && !cover.trim().startsWith('http')) {
         cover = `${gitHubWorkspaceDir}/${cover}`;
     }
+    lib_core.info(`cover is: ${cover}`);
     const includes = markdownFiles?.split('\n') || [];
     const chapters = [];
     for (const includeIndex in includes) {

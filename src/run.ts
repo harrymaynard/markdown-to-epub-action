@@ -59,6 +59,7 @@ export const run = async (inputs: IInputs): Promise<void> => {
   if (typeof cover === 'string' && !cover.trim().startsWith('http')) {
     cover = `${gitHubWorkspaceDir}/${cover}`
   }
+  core.info(`cover is: ${cover}`)
 
   const includes: Array<string> = markdownFiles?.split('\n') || []
   const chapters: Array<IChapter> = []
