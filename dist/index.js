@@ -107619,6 +107619,8 @@ const run = async (inputs) => {
     }
     catch (error) {
         console.error('Failed to generate Ebook because of:', error);
+        lib_core.setFailed(error.message);
+        throw error;
     }
 };
 

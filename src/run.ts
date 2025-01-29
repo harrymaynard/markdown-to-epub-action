@@ -129,10 +129,12 @@ export const run = async (inputs: IInputs): Promise<void> => {
   }
 
   try {
-    const epub = new EPub(option, `${gitHubWorkspaceDir}/${output}`);
+    const epub = new EPub(option, `${gitHubWorkspaceDir}/${output}`)
     await epub.render()
     console.log('Ebook Generated Successfully! Output:', output)
   } catch (error) {
-    console.error('Failed to generate Ebook because of:', error);
+    console.error('Failed to generate Ebook because of:', error)
+    core.setFailed(error.message)
+    throw error
   }
 }
