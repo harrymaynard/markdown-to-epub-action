@@ -133,7 +133,6 @@ export const run = async (inputs: IInputs): Promise<void> => {
     await epub.render()
     console.log('Ebook Generated Successfully! Output:', output)
   } catch (error) {
-    console.error('Failed to generate Ebook because of:', error)
     core.setFailed(error.message)
     throw error
   }

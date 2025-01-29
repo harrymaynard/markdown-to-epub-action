@@ -2,10 +2,10 @@
   "name": "markdown-to-epub-action",
   "version": "1.0.0",
   "description": "Converts a collection of markdown files to an EPub file.",
-  "main": "action.ts",
+  "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "build": "ncc build --license licenses.txt src/main.ts",
+    "build": "ncc build --license licenses.txt --external src/main.ts",
     "start": "node --import=tsx ./src/main.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
