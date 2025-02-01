@@ -50,15 +50,5 @@ inputs:
     default: 'book.epub'
 
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.markdownFiles }}
-    - ${{ inputs.title }}
-    - ${{ inputs.author }}
-    - ${{ inputs.publisher }}
-    - ${{ inputs.cover }}
-    - ${{ inputs.version }}
-    - ${{ inputs.lang }}
-    - ${{ inputs.tocTitle }}
-    - ${{ inputs.hideToC }}
+  using: 'node20'
+  main: 'dist/index.js'

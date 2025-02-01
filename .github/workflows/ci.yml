@@ -9,8 +9,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        
       - name: Create ePub
-        uses: harrymaynard/markdown-to-epub-action@main
+        uses: harrymaynard/markdown-to-epub-action@feat/v2
         with:
           markdownFiles: |-
             test-data/publication.md
@@ -24,3 +25,9 @@ jobs:
           tocTitle: My Table of Contents
           hideToC: false
           output: my-book.epub
+
+      - uses: actions/upload-artifact@v4
+        with:
+          path: my-book.epub
+          if-no-files-found: error
+          retention-days: 7

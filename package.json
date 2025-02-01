@@ -2,10 +2,11 @@
   "name": "markdown-to-epub-action",
   "version": "1.0.0",
   "description": "Converts a collection of markdown files to an EPub file.",
-  "main": "action.ts",
+  "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "start": "node --import=tsx ./action.ts",
+    "build": "npx rollup --config rollup.config.js",
+    "start": "node --import=tsx ./src/main.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,12 +20,24 @@
   },
   "homepage": "https://github.com/harrymaynard/markdown-to-epub-action#readme",
   "dependencies": {
-    "@lesjoursfr/html-to-epub": "^4.4.0",
+    "@actions/core": "^1.11.1",
+    "epub-gen-memory": "^1.1.2",
     "glob": "^11.0.0",
+    "gray-matter": "^4.0.3",
     "marked": "^14.0.0"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.2",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "@types/node": "^20.17.16",
+    "rollup": "^4.32.1",
+    "tslib": "^2.8.1",
     "tsx": "^4.17.0",
     "typescript": "~5.5.4"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "*"
   }
 }
