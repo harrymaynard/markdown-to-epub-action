@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "build": "ncc build --license licenses.txt --external src/main.ts",
+    "build": "npx rollup --config rollup.config.js",
     "start": "node --import=tsx ./src/main.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,15 +22,26 @@
   "dependencies": {
     "@actions/core": "^1.11.1",
     "@actions/github": "^6.0.0",
-    "@lesjoursfr/html-to-epub": "^4.4.0",
+    "@lesjoursfr/html-to-epub": "^4.4.2",
+    "epub-gen-memory": "^1.1.2",
     "glob": "^11.0.0",
     "gray-matter": "^4.0.3",
     "marked": "^14.0.0"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.2",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-typescript": "^12.1.2",
     "@types/node": "^20.17.16",
     "@vercel/ncc": "^0.38.3",
+    "rollup": "^4.32.1",
+    "ts-node": "^10.9.2",
+    "tslib": "^2.8.1",
     "tsx": "^4.17.0",
     "typescript": "~5.5.4"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "*"
   }
 }

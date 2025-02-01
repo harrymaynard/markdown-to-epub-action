@@ -5,7 +5,8 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import { marked } from 'marked'
 import { glob } from 'glob'
-import { EPub } from '@lesjoursfr/html-to-epub'
+// import { EPub } from '@lesjoursfr/html-to-epub'
+import epub from 'epub-gen-memory'
 import { type IChapter } from './interfaces/IChapter'
 
 interface IInputs {
@@ -106,7 +107,7 @@ export const run = async (inputs: IInputs): Promise<void> => {
       chapters.push({
         title: chapterTitle,
         author: chapterAuthor,
-        data: html,
+        content: html,
         excludeFromToc: chapterExcludeFromToc,
         beforeToc: chapterBeforeToc,
       })
@@ -129,8 +130,10 @@ export const run = async (inputs: IInputs): Promise<void> => {
   }
 
   try {
-    const epub = new EPub(option, `${gitHubWorkspaceDir}/${output}`)
-    await epub.render()
+    const buffer = await epub(option, chapters)
+    // await epub.render()
+    // const buffer = await epub.genEpub()
+    fs.writeFileSync(`${gitHubWorkspaceDir}/${output}`, buffer)
     console.log('Ebook Generated Successfully! Output:', output)
   } catch (error) {
     core.setFailed(error.message)

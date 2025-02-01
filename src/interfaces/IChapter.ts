@@ -1,6 +1,6 @@
 export interface IChapter {
   title: string
-  data: string
+  content: string
   author?: string
   excludeFromToc?: boolean
   beforeToc?: boolean

@@ -51,4 +51,4 @@ inputs:
 
 runs:
   using: 'node20'
-  main: 'src/main.ts'
+  main: 'dist/index.js'
