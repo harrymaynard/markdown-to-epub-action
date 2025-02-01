@@ -153521,10 +153521,6 @@ const run = async (inputs) => {
         console.error('Missing required input: \'author\'');
         process.exit(1);
     }
-    // Check if the cover is a URL or a file path.
-    if (typeof cover === 'string' && !cover.trim().startsWith('http')) {
-        cover = `${gitHubWorkspaceDir}/${cover}`;
-    }
     coreExports.info(`cover is: ${cover}`);
     const includes = markdownFiles?.split('\n') || [];
     const chapters = [];
