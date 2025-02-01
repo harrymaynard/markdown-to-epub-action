@@ -153561,7 +153561,7 @@ const run = async (inputs) => {
             chapters.push({
                 title: chapterTitle,
                 author: chapterAuthor,
-                data: html,
+                content: html,
                 excludeFromToc: chapterExcludeFromToc,
                 beforeToc: chapterBeforeToc,
             });
@@ -153579,7 +153579,6 @@ const run = async (inputs) => {
         tocTitle,
         hideToC,
         verbose: true,
-        content: chapters,
     };
     try {
         const buffer = await epub(option, chapters);
