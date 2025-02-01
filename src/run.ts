@@ -1,11 +1,9 @@
 import * as core from '@actions/core'
-import * as github from '@actions/github'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { marked } from 'marked'
 import { glob } from 'glob'
-// import { EPub } from '@lesjoursfr/html-to-epub'
 import epub from 'epub-gen-memory'
 import { type IChapter } from './interfaces/IChapter'
 
