@@ -153521,6 +153521,14 @@ const run = async (inputs) => {
         console.error('Missing required input: \'author\'');
         process.exit(1);
     }
+    // Check if the cover is a URL or a file path.
+    let coverFile = null;
+    if (typeof cover === 'string' && !cover.trim().startsWith('http')) {
+        const coverFilePath = `${gitHubWorkspaceDir}/${cover}`;
+        const fileName = cover.split('/').pop() || '';
+        const buffer = require$$0$6.readFileSync(coverFilePath);
+        coverFile = new File([buffer], fileName);
+    }
     coreExports.info(`cover is: ${cover}`);
     const includes = markdownFiles?.split('\n') || [];
     const chapters = [];
@@ -153569,7 +153577,7 @@ const run = async (inputs) => {
         description: '',
         author,
         publisher,
-        cover,
+        cover: coverFile ? coverFile : cover,
         version,
         lang,
         tocTitle,

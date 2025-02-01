@@ -54,6 +54,16 @@ export const run = async (inputs: IInputs): Promise<void> => {
     process.exit(1)
   }
 
+  // Check if the cover is a URL or a file path.
+  let coverFile: File = null
+  if (typeof cover === 'string' && !cover.trim().startsWith('http')) {
+    const coverFilePath: string = `${gitHubWorkspaceDir}/${cover}`
+    const fileName: string = cover.split('/').pop() || ''
+
+    const buffer = fs.readFileSync(coverFilePath)
+
+    coverFile = new File([buffer], fileName)
+  }
   core.info(`cover is: ${cover}`)
 
   const includes: Array<string> = markdownFiles?.split('\n') || []
@@ -114,7 +124,7 @@ export const run = async (inputs: IInputs): Promise<void> => {
     description: '',
     author,
     publisher,
-    cover,
+    cover: coverFile ? coverFile : cover,
     version,
     lang,
     tocTitle,
