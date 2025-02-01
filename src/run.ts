@@ -126,7 +126,6 @@ export const run = async (inputs: IInputs): Promise<void> => {
     tocTitle,
     hideToC,
     verbose: true,
-    content: chapters,
   }
 
   try {
