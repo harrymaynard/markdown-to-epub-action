@@ -1,5 +1,7 @@
-[metadata:title]:- "Publication"
-[metadata:beforeToc]:- "true"
-[metadata:excludeFromToc]:- "true"
+---
+title: Publication
+beforeToc: true
+excludeFromToc: true
+---
 
 Copyright 2024 by John Doe

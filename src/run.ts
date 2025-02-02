@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url'
 import { marked } from 'marked'
 import { glob } from 'glob'
 import epub from 'epub-gen-memory'
+import matter from 'gray-matter'
 import { type IChapter } from './interfaces/IChapter'
 
 interface IInputs {
@@ -22,8 +23,6 @@ interface IInputs {
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const run = async (inputs: IInputs): Promise<void> => {
-  core.info(`title is: ${inputs.title}`)
-
   // GitHub workspace directory.
   const gitHubWorkspaceDir: string = process.env.GITHUB_WORKSPACE // || '/github/workspace'
 
@@ -64,7 +63,6 @@ export const run = async (inputs: IInputs): Promise<void> => {
 
     coverFile = new File([buffer], fileName)
   }
-  core.info(`cover is: ${cover}`)
 
   const includes: Array<string> = markdownFiles?.split('\n') || []
   const chapters: Array<IChapter> = []
@@ -84,36 +82,19 @@ export const run = async (inputs: IInputs): Promise<void> => {
       // Read the markdown file to get the content of the file.
       const markdown: string = fs.readFileSync(path.resolve(import.meta.dirname, markdownFileName)).toString().trim()
 
-      // Extract chapter title from markdown metadata.
-      const chapterTitleMatch: Array<string> = markdown.match(/\[metadata:title\]:- "([^"]+)"/i)
-      const chapterTitle: string | undefined = chapterTitleMatch ? chapterTitleMatch[1].trim() : undefined
-
-      // Extract chapter author from markdown metadata.
-      const chapterAuthorMatch: Array<string> = markdown.match(/\[metadata:author\]:- "([^"]+)"/i)
-      const chapterAuthor: string | undefined = chapterAuthorMatch ? chapterAuthorMatch[1].trim() : undefined
-
-      // Extract chapter excludeFromToc from markdown metadata.
-      const chapterExcludeFromTocMatch: Array<string> = markdown.match(/\[metadata:excludeFromToc\]:- "([^"]+)"/i)
-      const chapterExcludeFromToc: boolean | undefined = chapterExcludeFromTocMatch
-        ? chapterExcludeFromTocMatch[1].trim() === 'true'
-        : undefined
-
-      // Extract chapter excludeFromToc from markdown metadata.
-      const chapterBeforeTocMatch: Array<string> = markdown.match(/\[metadata:beforeToc\]:- "([^"]+)"/i)
-      const chapterBeforeToc: boolean | undefined = chapterBeforeTocMatch
-        ? chapterBeforeTocMatch[1].trim() === 'true'
-        : undefined
+      // Parse the front matter from the markdown content.
+      const frontMatterResult = matter(markdown)
 
       // Generate the HTML content from markdown.
-      const html: string = await marked.parse(markdown)
+      const html: string = await marked.parse(frontMatterResult.content)
       
       // Concatenate the chapter to the chapters list.
       chapters.push({
-        title: chapterTitle,
-        author: chapterAuthor,
+        title: frontMatterResult?.data?.title,
+        author: frontMatterResult?.data?.author,
+        excludeFromToc: frontMatterResult?.data?.excludeFromToc,
+        beforeToc: frontMatterResult?.data?.beforeToc,
         content: html,
-        excludeFromToc: chapterExcludeFromToc,
-        beforeToc: chapterBeforeToc,
       })
       console.log('Generated chapter from markdown file:', markdownFileName)
     }
@@ -134,8 +115,6 @@ export const run = async (inputs: IInputs): Promise<void> => {
 
   try {
     const buffer = await epub(option, chapters)
-    // await epub.render()
-    // const buffer = await epub.genEpub()
     fs.writeFileSync(`${gitHubWorkspaceDir}/${output}`, buffer)
     console.log('Ebook Generated Successfully! Output:', output)
   } catch (error) {
