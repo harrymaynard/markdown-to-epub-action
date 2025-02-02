@@ -1,4 +1,6 @@
-[metadata:title]:- "Preface"
-[metadata:beforeToc]:- "true"
+---
+title: Preface
+beforeToc: true
+---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
