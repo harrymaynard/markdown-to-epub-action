@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v4
         
       - name: Create ePub
-        uses: harrymaynard/markdown-to-epub-action@feat/v2
+        uses: harrymaynard/markdown-to-epub-action@main
         with:
           markdownFiles: |-
             test-data/publication.md
