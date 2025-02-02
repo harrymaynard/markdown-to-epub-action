@@ -158621,7 +158621,6 @@ var matter = /*@__PURE__*/getDefaultExportFromCjs(grayMatterExports);
 
 // eslint-disable-next-line @typescript-eslint/require-await
 const run = async (inputs) => {
-    coreExports.info(`title is: ${inputs.title}`);
     // GitHub workspace directory.
     const gitHubWorkspaceDir = process.env.GITHUB_WORKSPACE; // || '/github/workspace'
     // Inputs.
@@ -158655,7 +158654,6 @@ const run = async (inputs) => {
         const buffer = require$$0$6.readFileSync(coverFilePath);
         coverFile = new File([buffer], fileName);
     }
-    coreExports.info(`cover is: ${cover}`);
     const includes = markdownFiles?.split('\n') || [];
     const chapters = [];
     for (const includeIndex in includes) {
@@ -158669,22 +158667,7 @@ const run = async (inputs) => {
             const markdownFileName = markdownFileNames[fileIndex];
             // Read the markdown file to get the content of the file.
             const markdown = require$$0$6.readFileSync(require$$1$6.resolve(import.meta.dirname, markdownFileName)).toString().trim();
-            // Extract chapter title from markdown metadata.
-            const chapterTitleMatch = markdown.match(/\[metadata:title\]:- "([^"]+)"/i);
-            chapterTitleMatch ? chapterTitleMatch[1].trim() : undefined;
-            // Extract chapter author from markdown metadata.
-            const chapterAuthorMatch = markdown.match(/\[metadata:author\]:- "([^"]+)"/i);
-            chapterAuthorMatch ? chapterAuthorMatch[1].trim() : undefined;
-            // Extract chapter excludeFromToc from markdown metadata.
-            const chapterExcludeFromTocMatch = markdown.match(/\[metadata:excludeFromToc\]:- "([^"]+)"/i);
-            chapterExcludeFromTocMatch
-                ? chapterExcludeFromTocMatch[1].trim() === 'true'
-                : undefined;
-            // Extract chapter excludeFromToc from markdown metadata.
-            const chapterBeforeTocMatch = markdown.match(/\[metadata:beforeToc\]:- "([^"]+)"/i);
-            chapterBeforeTocMatch
-                ? chapterBeforeTocMatch[1].trim() === 'true'
-                : undefined;
+            // Parse the front matter from the markdown content.
             const frontMatterResult = matter(markdown);
             // Generate the HTML content from markdown.
             const html = await marked.parse(frontMatterResult.content);
