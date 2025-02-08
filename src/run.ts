@@ -7,19 +7,7 @@ import { glob } from 'glob'
 import epub from 'epub-gen-memory'
 import matter from 'gray-matter'
 import { type IChapter } from './interfaces/IChapter'
-
-interface IInputs {
-  markdownFiles: string
-  title: string
-  author: string
-  publisher: string
-  cover: string
-  version: string
-  lang: string
-  tocTitle: string
-  hideToC: string
-  output: string
-}
+import { type IInputs } from './interfaces/IInputs'
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const run = async (inputs: IInputs): Promise<void> => {
