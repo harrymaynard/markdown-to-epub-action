@@ -50,5 +50,5 @@ inputs:
     default: 'book.epub'
 
 runs:
-  using: 'node20'
+  using: 'node24'
   main: 'dist/index.js'
